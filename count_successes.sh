@@ -1,10 +1,10 @@
 #!/bin/bash
 
-File=$1
+file=$1
 
 temp_dir=$(mktemp -d)
 
-tar xfz "$File" -C "$temp_dir"
+tar xfz "$file" -C "$temp_dir"
 
 successes=$(grep -rl  SUCCESS "$temp_dir" | wc -l)
 failures=$(grep -rl FAILURE "$temp_dir" | wc -l)
