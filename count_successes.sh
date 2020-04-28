@@ -2,13 +2,13 @@
 
 File=$1
 
-mkdir ./test_data/files
+temp_dir=$(mktemp -d)
 
-tar xfz $1 -C ./test_data/files/
+tar xfz "$File" -C "$temp_dir"
 
-s=$(grep SUCCESS ./test_data/files/files/* | wc -l)
-f=$(grep FAILURE ./test_data/files/files/* | wc -l)
+successes=$(grep -rl  SUCCESS "$temp_dir" | wc -l)
+failures=$(grep -rl FAILURE "$temp_dir" | wc -l)
 
-echo "There were "$s" successes and "$f" failures."
+echo "There were $successes successes and $failures failures."
 
-rm -rf ./test_data/files
+rm -rf "$temp_dir"
